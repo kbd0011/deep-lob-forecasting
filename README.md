@@ -26,8 +26,16 @@ project1_deep_lob/
 ├── LLM_PROMPTS.md
 ├── requirements.txt
 ├── src/models/deeplob.py     # IMPLEMENTED: faithful DeepLOB (PyTorch)
-├── src/data/                 # TODO: FI-2010 loader, labels, normalization
-├── src/models/tlob.py        # TODO: transformer (dual attention)
-├── src/backtest/             # TODO: cost-aware eval (use ../../shared/validation.py)
-└── src/eval/                 # TODO: tick-strata + decay analysis
+├── src/models/tlob.py        # IMPLEMENTED: TLOB dual-attention transformer (einops)
+├── src/data/fi2010.py        # IMPLEMENTED: FI-2010 loader, horizon labels, leakage-safe windowing
+├── src/train.py              # IMPLEMENTED: Hydra trainer (class weights, macro-F1 early stop, wandb)
+├── src/backtest/trade_eval.py # IMPLEMENTED: cost-aware net P&L, turnover, Deflated Sharpe
+└── src/eval/strata.py        # IMPLEMENTED: tick-strata + temporal-decay F1 + plots
 ```
+
+## Status
+All modules implemented with tests (CPU-only, tiny tensors; no network/GPU; FI-2010 windowing tested on a
+synthetic array). DeepLOB and TLOB share the `(B,1,100,40)->(B,3)` contract so they are directly comparable.
+The trading evaluation makes the project's thesis concrete — its tests show a *perfectly accurate* predictor
+still loses money once half-spread + queue/latency costs are charged against tick-sized edges. Drop in
+FI-2010 (`Train_*`/`Test_*` files under `data/`) and run `python -m src.train` to reproduce.
