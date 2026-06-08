@@ -1,0 +1,27 @@
+# data & model artifacts
+data/
+*.pt
+*.ckpt
+*.pkl
+*.npy
+*.npz
+# outputs
+reports/*.png
+reports/*.csv
+wandb/
+outputs/
+multirun/
+lightning_logs/
+# python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+# env
+.venv/
+venv/
+.env
+# os
+.DS_Store
