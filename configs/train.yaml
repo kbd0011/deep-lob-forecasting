@@ -1,0 +1,26 @@
+# Hydra config for DeepLOB/TLOB training on FI-2010
+defaults:
+  - _self_
+
+data:
+  train_path: data/Train_Dst_NoAuction_DecPre_CF_7.txt
+  test_path: data/Test_Dst_NoAuction_DecPre_CF_7.txt
+  horizon: 10          # one of {1,2,3,5,10}
+
+model:
+  name: deeplob        # deeplob | tlob
+  kwargs: {}
+
+train:
+  epochs: 50
+  batch_size: 64
+  lr: 0.001
+  weight_decay: 0.0
+  patience: 8
+  device: cpu
+  use_class_weights: true
+  grad_clip: 1.0
+  ckpt_path: reports/best_model.pt
+  seed: 42
+  wandb_enabled: false
+  wandb_project: deep-lob
