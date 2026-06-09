@@ -26,15 +26,6 @@ that shows whether directional accuracy survives as P&L.
 A DeepLOB clone is now a baseline, not an achievement. Your contribution is the rigorous "when/why does it
 work, and does the edge survive costs?" analysis.
 
-## Why it ranks #3
-Highest prestige with prop shops and the clearest microstructure signal — but constrained by free-data limits
-(FI-2010 is dated; LOBSTER free samples are small; full LOB data is paid) and a crowded GitHub field.
-
-## What "done" looks like
-> "Replicated DeepLOB F1 within ~1 pt of paper on FI-2010; TLOB beats it by ~3 F1. Predictability is far higher
-> for large-tick names and **decays materially across 2019→2023**. After 10 bps costs and queue/latency
-> assumptions, the naive signal's P&L edge is ~0 for liquid names and survives only in [regime]. Deflated Sharpe
-> reported over all configs tried."
 
 ## Pipeline
 ```mermaid
@@ -64,7 +55,7 @@ project1_deep_lob/
 ## Status
 All modules implemented with tests (CPU-only, tiny tensors; no network/GPU; FI-2010 windowing tested on a
 synthetic array). DeepLOB and TLOB share the `(B,1,100,40)->(B,3)` contract so they are directly comparable.
-The trading evaluation makes the project's thesis concrete — its tests show a *perfectly accurate* predictor
+The trading evaluation makes the project's thesis concrete, its tests show a *perfectly accurate* predictor
 still loses money once half-spread + queue/latency costs are charged against tick-sized edges. Drop in
 FI-2010 (`Train_*`/`Test_*` files under `data/`) and run `python -m src.train` to reproduce.
 
@@ -76,7 +67,7 @@ make train                 # after dropping FI-2010 Train_*/Test_* files into da
 
 ## Design decisions, limitations & what's next
 - **Accuracy ≠ P&L.** The trading evaluation deliberately charges half-spread + a queue/latency penalty on
-  turnover, so a high-macro-F1 model can still lose money — the failure mode most LOB repos omit.
+  turnover, so a high-macro-F1 model can still lose money, the failure mode most LOB repos omit.
 - **Shared I/O for DeepLOB and TLOB** makes the two a clean, controlled comparison rather than apples-to-oranges.
 - **Limitation:** FI-2010 is dated and the figure here is illustrative until the dataset is dropped into `data/`.
 - **What I'd do next:** real FI-2010 + LOBSTER validation; queue-position modeling from message data;
