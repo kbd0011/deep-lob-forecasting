@@ -47,3 +47,9 @@ synthetic array). DeepLOB and TLOB share the `(B,1,100,40)->(B,3)` contract so t
 The trading evaluation makes the project's thesis concrete — its tests show a *perfectly accurate* predictor
 still loses money once half-spread + queue/latency costs are charged against tick-sized edges. Drop in
 FI-2010 (`Train_*`/`Test_*` files under `data/`) and run `python -m src.train` to reproduce.
+
+## References
+- Zhang, Z., Zohren, S. & Roberts, S. (2019). *DeepLOB: Deep Convolutional Neural Networks for Limit Order Books.* IEEE Trans. Signal Processing.
+- Berti, L. & Kasneci, G. (2025). *TLOB: A Dual-Attention Transformer for Limit Order Book forecasting.* (replicated here)
+- Ntakaris, A. et al. (2018). *Benchmark dataset for mid-price forecasting of limit order book data (FI-2010).* J. Forecasting.
+- López de Prado, M. (2018). *Advances in Financial Machine Learning* (Deflated Sharpe, honest backtesting). Wiley.
