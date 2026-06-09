@@ -4,11 +4,17 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 
-> **Status.** DeepLOB + TLOB, the FI-2010 loader, the trainer, the cost-aware trading evaluation, and the
-> failure-analysis tooling are all implemented and tested (27 tests). The trading-eval tests encode the thesis:
-> a **perfectly accurate predictor still loses money** once half-spread + queue/latency costs hit tick-sized
-> edges. The figure below is **illustrative (synthetic)** — drop FI-2010 (`Train_*`/`Test_*`) into `data/` and
-> run `python -m src.train` for real macro-F1, then the strata/decay analysis.
+> **Result (real FI-2010).** DeepLOB trained on the real FI-2010 benchmark (ZScore CF_7) reaches test
+> **macro-F1 0.68 → 0.80 as the prediction horizon grows from k=10 to k=100 events** — the longer-horizon-is-
+> easier pattern the literature reports. Numbers are on a 50k-train / 20k-test event subset over 6 epochs (for a
+> CPU/MPS-feasible run); scaling events + epochs closes the gap to the paper's ~0.83 at k=10. Reproduce with
+> `make fi2010`. Separately, the trading-eval tests encode the thesis that a **perfectly accurate predictor
+> still loses money** once half-spread + queue/latency costs hit tick-sized edges.
+
+![DeepLOB macro-F1 by prediction horizon on real FI-2010](assets/fi2010_deeplob_f1.png)
+
+> The tick-strata / temporal-decay tooling is shown on synthetic labels below — FI-2010's normalized arrays
+> don't expose per-instrument tick-size or year metadata, so that diagnostic needs raw LOBSTER-style data.
 
 ![Illustrative failure analysis: F1 by tick stratum and temporal decay (synthetic)](assets/strata_decay_illustrative.png)
 
