@@ -1,5 +1,13 @@
 # Project 1 — Deep LOB Forecasting + Honest Trading Evaluation (RANK #3)
 
+> **Status.** DeepLOB + TLOB, the FI-2010 loader, the trainer, the cost-aware trading evaluation, and the
+> failure-analysis tooling are all implemented and tested (27 tests). The trading-eval tests encode the thesis:
+> a **perfectly accurate predictor still loses money** once half-spread + queue/latency costs hit tick-sized
+> edges. The figure below is **illustrative (synthetic)** — drop FI-2010 (`Train_*`/`Test_*`) into `data/` and
+> run `python -m src.train` for real macro-F1, then the strata/decay analysis.
+
+![Illustrative failure analysis: F1 by tick stratum and temporal decay (synthetic)](assets/strata_decay_illustrative.png)
+
 **Thesis.** Reimplement DeepLOB (Zhang, Zohren & Roberts, 2019) and a modern transformer (TLOB, 2025) for
 short-horizon mid-price direction on limit-order-book data — then do the part everyone skips: **failure
 analysis** (tick-size strata, signal decay over time) and a **transaction-cost-aware trading evaluation**
